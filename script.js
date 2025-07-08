@@ -48,6 +48,10 @@ function update(time = 0){
 
     if( dropCounter > 1000) {
         currentPiece.position.y += 1;
+        if(checkCollision()) {
+            currentPiece.position.y -= 1; // Revert the last move that caused collision
+            placePiece();
+        }
         dropCounter = 0;
     }
 
@@ -292,7 +296,30 @@ function rotatePiece(matrix, clockwise = true) {
     
     return rotated;
 }
+window.addEventListener('DOMContentLoaded', () => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
+    if (isMobile) {
+        document.getElementById('left').addEventListener('click', () => {
+            simulateKey('ArrowLeft');
+        });
 
+        document.getElementById('right').addEventListener('click', () => {
+            simulateKey('ArrowRight');
+        });
+
+        document.getElementById('down').addEventListener('click', () => {
+            simulateKey('ArrowDown');
+        });
+
+        document.getElementById('rotate').addEventListener('click', () => {
+            simulateKey('ArrowUp');
+        });
+    }
+
+    function simulateKey(key) {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key }));
+    }
+});
 
 update();
