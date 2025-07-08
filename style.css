@@ -62,3 +62,49 @@ body{
     background-color: #1e7e34;
 }
 
+/* Botones móviles ocultos por defecto */
+.mobile-controls {
+    display: none;
+}
+
+/* Mostrar solo en pantallas pequeñas */
+@media (max-width: 768px) {
+    .content {
+        width: 90%;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .game {
+        grid-area: auto;
+        margin: 0 auto;
+    }
+
+    .info {
+        grid-area: auto;
+        text-align: center;
+    }
+
+    .mobile-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .mobile-controls button {
+        padding: 15px;
+        font-size: 20px;
+        background-color: #555;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        min-width: 60px;
+    }
+
+    .mobile-controls button:active {
+        background-color: #777;
+    }
+}
