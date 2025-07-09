@@ -388,6 +388,23 @@ restartBtn.addEventListener("click", () => {
     }
 
 })
+//this blocks the zoom on mobile devices with double tap
+document.addEventListener('touchstart', function preventZoom(e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function preventDoubleTapZoom(e) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+
 
 initBoard();
 draw();

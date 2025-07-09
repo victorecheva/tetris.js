@@ -4,6 +4,23 @@
     box-sizing: border-box;
 }
 
+/* Desactiva selección de texto en todo */
+body, button, canvas, * {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none; /* iOS */
+}
+
+/* Opcional: evitar arrastre de imágenes o canvas */
+img, canvas {
+    -webkit-user-drag: none;
+    -webkit-user-drag: none;
+    pointer-events: auto;
+}
+
+
 html,body{
     width: 100%;
     height: 100vh;
