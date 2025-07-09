@@ -9,24 +9,36 @@
 </head>
 <body>
     <div class="content">
+        <div class="empty"></div>
         <canvas class="game"></canvas>
         <div class="info">
-            <h1>Tetris</h1>
-            <p>By Víctor Echevarría</p>
-            <p>Use the arrow keys to move the pieces.</p>
-            <p>Use the arrow up key to rotate the pieces</p>
-            <p>Press the space bar to drop the pieces faster.</p>
+            <canvas class="next-block"></canvas>
+            <div>
+                <h1>Tetris</h1>
+                <p>By Víctor Echevarría</p>
+                <p>Use the arrow keys to move the pieces.</p>
+                <p>Use the arrow up key to rotate the pieces</p>
+                <p>Press the space bar to drop the pieces faster.</p>
+
+            </div>
         </div>
     </div>
+    <div class="buttons-container">
+        <div class="empty"></div>
+        <div class="buttons">
+            <button id="play">Play!</button>
+            <button id="restart">Restart</button>
+        </div>
+        <div class="empty"></div>
+    </div>
     
-    <!-- <button id="play">Play!</button> -->
 
     <script type="module" src="script.js"></script>
     <div class="mobile-controls">
-        <button id="left">⬅️</button>
-        <button id="rotate">🔄</button>
-        <button id="right">➡️</button>
-        <button id="down">⬇️</button>
+        <button id="left">←</button>
+        <button id="down">↓</button>
+        <button id="right">→</button>
+        <button id="rotate">⟳</button>
     </div>
 
 </body>

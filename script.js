@@ -36,6 +36,15 @@ let currentPiece = {
     color: randomPiece.color,
     name: randomPiece.name
 }
+randomPiece = getRandomPiece();
+let nextPiece = {
+    position : { x: 4, y: 0 },
+    shape: randomPiece.shape,
+    color: randomPiece.color,
+    name: randomPiece.name
+}
+
+
 
 let dropCounter = 0;
 let lastTime = 0;
@@ -59,6 +68,27 @@ function update(time = 0){
 
     //mejor que setInterval
     window.requestAnimationFrame(update);
+}
+
+function draw_next_piece(){
+    const nextCanvas = document.getElementsByClassName('next-block')[0];
+    const nextCtx = nextCanvas.getContext('2d');
+    nextCanvas.width = 4 * BLOCK_SIZE;
+    nextCanvas.height = 4 * BLOCK_SIZE;
+    nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+    nextCtx.scale(BLOCK_SIZE, BLOCK_SIZE);
+
+    for (let y = 0; y < nextPiece.shape.length; y++) {
+        for (let x = 0; x < nextPiece.shape[y].length; x++) {
+            if (nextPiece.shape[y][x] === 1) {
+                nextCtx.fillStyle = nextPiece.color;
+                nextCtx.fillRect(x, y, 1, 1);
+                nextCtx.strokeStyle = 'black';
+                nextCtx.lineWidth = 0.05;
+                nextCtx.strokeRect(x, y, 1, 1)
+            }
+        }
+    }
 }
 
 function draw_block(x, y, playerPiece = false, color = null) {
@@ -123,6 +153,8 @@ function draw(){
         }
     }
 
+    draw_next_piece()
+
 }
 
 
@@ -181,8 +213,14 @@ function placePiece(){
 
     checkLines();
     
-    currentPiece = getRandomPiece()
-    currentPiece.position = { x: 4, y: 0 };
+    currentPiece = nextPiece
+    randomPiece = getRandomPiece();
+    nextPiece = {
+        position : { x: 4, y: 0 },
+        shape: randomPiece.shape,
+        color: randomPiece.color,
+        name: randomPiece.name
+    }
     
     // Check for collisions after placing the piece for checking if the game is over
     if (checkCollision()) {
@@ -322,4 +360,35 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-update();
+let gameStarted = false;
+const playBtn = document.getElementById('play');
+playBtn.addEventListener("click", () => {
+    if (!gameStarted) {
+        gameStarted = true;
+        update();
+    }
+});
+
+const restartBtn = document.getElementById('restart');
+restartBtn.addEventListener("click", () => {
+    initBoard();
+    let randomPiece = getRandomPiece();
+    currentPiece = {
+        position : { x: 4, y: 0 },
+        shape: randomPiece.shape,
+        color: randomPiece.color,
+        name: randomPiece.name
+    }
+    randomPiece = getRandomPiece();
+    nextPiece = {
+        position : { x: 4, y: 0 },
+        shape: randomPiece.shape,
+        color: randomPiece.color,
+        name: randomPiece.name
+    }
+
+})
+
+initBoard();
+draw();
+// update();
